@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             ServiceOrderSeeder::class,
         ]);
+        // \App\Models\User::factory(5)->create();
     }
 }

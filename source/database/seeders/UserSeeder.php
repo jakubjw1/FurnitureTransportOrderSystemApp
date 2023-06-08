@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
@@ -20,10 +21,24 @@ class UserSeeder extends Seeder
         User::truncate();
 
         User::insert([
+
+            // Admin acc
+            [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('123456789'),
+                'role' => 'admin',
+                'first_name' => 'Admin',
+                'last_name' => ' ',
+                'company_name' => ' ',
+                'tax_id' => 1234567890,
+            ],
+            // Users
             [
                 'name' => 'jakubw11',
                 'email' => 'jakubw11@gmail.com',
-                'password' => bcrypt('12345'),
+                'password' => Hash::make('123456789'),
+                'role' => 'user',
                 'first_name' => 'Jakub',
                 'last_name' => 'Wojtowicz',
                 'company_name' => 'Company1',
@@ -32,7 +47,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'pawel007',
                 'email' => 'pawel007@gmail.com',
-                'password' => bcrypt('12345'),
+                'password' => Hash::make('12345'),
+                'role' => 'user',
                 'first_name' => 'Pawel',
                 'last_name' => 'Pawlik',
                 'company_name' => 'Company2',
@@ -41,7 +57,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'dawid00',
                 'email' => 'dawid00@gmail.com',
-                'password' => bcrypt('Dawid1!'),
+                'password' => Hash::make('Dawid1!'),
+                'role' => 'user',
                 'first_name' => 'Dawid',
                 'last_name' => 'Dawidowicz',
                 'company_name' => 'Company1',
@@ -50,7 +67,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'moni123',
                 'email' => 'moni123@gmail.com',
-                'password' => bcrypt('12345'),
+                'password' => Hash::make('12345'),
+                'role' => 'user',
                 'first_name' => 'Monika',
                 'last_name' => 'Nowak',
                 'company_name' => 'Company1',
@@ -59,7 +77,8 @@ class UserSeeder extends Seeder
             [
                 'name' => 'arturoo1',
                 'email' => 'arturoo1@gmail.com',
-                'password' => bcrypt('12345'),
+                'password' => Hash::make('12345'),
+                'role' => 'user',
                 'first_name' => 'Artur',
                 'last_name' => 'Kowalski',
                 'company_name' => ' ',
