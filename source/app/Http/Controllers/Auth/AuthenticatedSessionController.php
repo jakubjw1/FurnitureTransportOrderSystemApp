@@ -18,6 +18,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        session()->regenerateToken();
+
         return view('auth.login');
     }
 
@@ -32,7 +34,17 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt($request->only($field, 'password'), $request->filled('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
+
+            $user = Auth::user();
+
+            $url = '';
+            if($user->role === 'admin') {
+                $url = 'admin/dashboard';
+            } elseif($user->role === 'user') {
+                $url = '/mainpage';
+            }
+
+            return redirect()->intended($url);
         }
 
         throw ValidationException::withMessages([

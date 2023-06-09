@@ -23,21 +23,25 @@ class ServiceSeeder extends Seeder
                 'name' => 'Furniture Transport(city)',
                 'description' => 'Furniture transport within the city.',
                 'price' => 50.00,
+                'image' => 'images/truck_service.png',
             ],
             [
                 'name' => 'Furniture transport(province)',
                 'description' => 'Furniture transport within the province.',
                 'price' => 150.00,
+                'image' => 'images/truck_service.png',
             ],
             [
                 'name' => 'Furniture transport(country)',
                 'description' => 'Furniture transport within the country.',
                 'price' => 250.00,
+                'image' => 'images/truck_service.png',
             ],
             [
                 'name' => 'Disassembly + assembly',
                 'description' => 'Disassembly and assembly of furniture.',
                 'price' => 50.00,
+                'image' => 'images/assembly.jpg',
             ],
         ]);
 
