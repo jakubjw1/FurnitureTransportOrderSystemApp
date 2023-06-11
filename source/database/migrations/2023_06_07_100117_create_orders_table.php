@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign("driver_id")->references("id")->on("drivers");
             $table->datetime("order_date");
             $table->string("payment_method");
+            $table->decimal("total_amount", 10, 2)->default(0.00);
             $table->string("order_status");
             $table->timestamps();
         });

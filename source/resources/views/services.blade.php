@@ -21,9 +21,11 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="rounded-md bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
-                                    Order
-                                </button>
+                                @if(strpos($service->name, 'Disassembly + assembly') === false)
+                                    <a href="{{ route('order.create', ['service_id' => $service->id]) }}" class="rounded-md bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                                        Order
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endforeach

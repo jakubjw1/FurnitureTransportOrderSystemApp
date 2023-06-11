@@ -26,6 +26,7 @@ class OrderSeeder extends Seeder
                 'driver_id' => 1,
                 'order_date' => now(),
                 'payment_method' => 'Credit Card',
+                'total_amount' => '100.00',
                 'order_status' => 'Pending',
             ],
             [
@@ -34,6 +35,7 @@ class OrderSeeder extends Seeder
                 'driver_id' => 3,
                 'order_date' => \Carbon\Carbon::parse('2023-06-01 10:30:00'),
                 'payment_method' => 'Credit Card',
+                'total_amount' => '100.00',
                 'order_status' => 'Pending',
             ],
         ]);
