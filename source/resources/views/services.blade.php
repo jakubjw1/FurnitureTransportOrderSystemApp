@@ -11,18 +11,19 @@
                 <div class="p-6 text-gray-900">
                     <p style="font-size: 24px;">Available Services:</p>
                     @foreach($services as $service)
-                        <div class="flex items-center justify-between mb-4 bg-gray-100 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-4 bg-blue-200 rounded-lg p-4">
                             <div class="flex items-center">
-                                <img src="{{ $service->image }}" alt="Service Image" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-50 lg:h-50 mr-4">
-                                <div>
-                                    <h3 class="text-2xl">{{ $service->name }}</h3>
-                                    <p>{{ $service->description }}</p>
-                                    <p style="font-size: 18px;">{{ $service->price }}PLN</p>
-                                </div>
+                                <a href="{{ route('service.info', ['service' => $service->id]) }}">
+                                    <img src="{{ $service->image }}" alt="Service Image" class="w-32 h-32 sm:w-40 sm:h-40 lg:w-50 lg:h-50 mr-4">
+                                    <div>
+                                        <h3 class="text-2xl">{{ $service->name }}</h3>
+                                        <p style="font-size: 18px;">{{ $service->price }}PLN</p>
+                                    </div>
+                                </a>
                             </div>
                             <div>
                                 @if(strpos($service->name, 'Disassembly + assembly') === false)
-                                    <a href="{{ route('order.create', ['service_id' => $service->id]) }}" class="rounded-md bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                                    <a href="{{ route('order.create', ['service_id' => $service->id]) }}" class="rounded-md bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6">
                                         Order
                                     </a>
                                 @endif

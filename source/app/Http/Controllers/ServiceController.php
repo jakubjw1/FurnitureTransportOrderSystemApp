@@ -13,4 +13,17 @@ class ServiceController extends Controller
 
         return view('services', compact('services'));
     }
+
+    public function info(Service $service)
+    {
+        return view('service_info', ['service' => $service]);
+    }
+
+    public function adminIndex()
+    {
+        $services = Service::all();
+
+        return view('admin.admin_services', compact('services'));
+    }
+
 }

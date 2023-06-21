@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string("first_name");
             $table->string("last_name");
             $table->string("company_name")->nullable();
-            $table->integer("tax_id");
+            $table->integer("tax_id")->unique();
         });
     }
 

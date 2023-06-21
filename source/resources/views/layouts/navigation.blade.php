@@ -6,22 +6,56 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('mainpage') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="{{ asset('images/ftos.png') }}" alt="Logo" class="h-10 w-auto">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')" class="text-xl">
-                        {{ __('Main Page') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
-                        {{ __('Services') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
-                        {{ __('About') }}
-                    </x-nav-link>
+                    @guest
+                        <x-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')" class="text-xl">
+                            {{ __('Main Page') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
+                            {{ __('Services') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
+                            {{ __('About') }}
+                        </x-nav-link>
+                    @else
+                        @if (Auth::user()->role === 'user')
+                            <x-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')" class="text-xl">
+                                {{ __('Main Page') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
+                                {{ __('Services') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
+                                {{ __('About') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('orders.index', ['user_id' => Auth::user()->id])" :active="request()->routeIs('orders.index')" class="text-xl">
+                                {{ __('My Orders') }}
+                            </x-nav-link>
+                        @elseif (Auth::user()->role === 'admin')
+                            <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')" class="text-xl">
+                                {{ __('Users') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')" class="text-xl">
+                                {{ __('Orders') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.services.index')" :active="request()->routeIs('admin.services.index')" class="text-xl">
+                                {{ __('Services') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.drivers.index')" :active="request()->routeIs('admin.drivers.index')" class="text-xl">
+                                {{ __('Drivers') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.cars.index')" :active="request()->routeIs('admin.cars.index')" class="text-xl">
+                                {{ __('Cars') }}
+                            </x-nav-link>
+                        @endif
+                    @endguest
                 </div>
+
             </div>
 
             <!-- Settings Links -->
@@ -63,16 +97,50 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('mainpage')" class="text-xl">
-                {{ __('Main Page') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
-                {{ __('Services') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
-                {{ __('About') }}
-            </x-responsive-nav-link>
+            @guest
+                <x-responsive-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')" class="text-xl">
+                    {{ __('Main Page') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
+                    {{ __('Services') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
+                    {{ __('About') }}
+                </x-responsive-nav-link>
+            @else
+                @if (Auth::user()->role === 'user')
+                    <x-responsive-nav-link :href="route('mainpage')" :active="request()->routeIs('mainpage')" class="text-xl">
+                        {{ __('Main Page') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')" class="text-xl">
+                        {{ __('Services') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="text-xl">
+                        {{ __('About') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('orders.index', ['user_id' => Auth::user()->id])" :active="request()->routeIs('orders.index')" class="text-xl">
+                        {{ __('My Orders') }}
+                    </x-responsive-nav-link>
+                @elseif (Auth::user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')" class="text-xl">
+                        {{ __('Users') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')" class="text-xl">
+                        {{ __('Orders') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.services.index')" :active="request()->routeIs('admin.services.index')" class="text-xl">
+                        {{ __('Services') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.drivers.index')" :active="request()->routeIs('admin.drivers.index')" class="text-xl">
+                        {{ __('Drivers') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.cars.index')" :active="request()->routeIs('admin.cars.index')" class="text-xl">
+                        {{ __('Cars') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endguest
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

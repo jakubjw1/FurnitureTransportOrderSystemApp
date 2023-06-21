@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Panel') }}
+            {{ __('Service Information') }}
         </h2>
     </x-slot>
 
@@ -9,12 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-
-                    @auth
-                        <p class="text-4xl font-bold">{{ __("Welcome,") }} {{ Auth::user()->name }}</p>
-                        <p class="text-xl p-6">{{ __("Select any tab from the navigation bar to manage resources.") }}</p>
-                    @endauth
-
+                    <h1 class="text-3xl font-bold mb-4">{{ $service->name }}</h1>
+                    <img src="{{ asset('images/truck_service.png') }}" alt="Service Image" class="w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 mr-4">
+                    <p class="text-lg mt-8">{{ $service->description }}</p>
                 </div>
             </div>
         </div>
