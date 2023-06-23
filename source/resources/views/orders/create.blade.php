@@ -22,6 +22,16 @@
                             <textarea name="description" id="description" class="border border-gray-300 rounded-lg p-2" required></textarea>
                         </div>
 
+                        <div class="mb-4">
+                            <label for="from" class="block font-bold mb-2">From:</label>
+                            <input type="text" name="from" id="from" class="border border-gray-300 rounded-lg p-2" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="destination" class="block font-bold mb-2">Destination:</label>
+                            <input type="text" name="destination" id="destination" class="border border-gray-300 rounded-lg p-2" required>
+                        </div>
+
                         <h3 class="text-xl">Selected Serivces:</h3>
 
                         <div class="mb-4">

@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders/create/{service_id}', [OrderController::class, 'create'])->name('order.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
     Route::get('/orders/{user_id}', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders/cancel', [OrderController::class, 'cancelOrder'])->name('orders.cancel');
+    Route::post('/orders/{orderId}/change-service-date', [OrderController::class, 'changeServiceDate'])->name('orders.change-service-date');
 });
 
 
@@ -64,6 +66,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/orders/{orderId}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
 
     Route::get('/admin/services', [ServiceController::class, 'adminIndex'])->name('admin.services.index');
+    Route::post('/admin/services', [ServiceController::class, 'store'])->name('admin.services.store');
+    Route::get('/admin/services/{serviceId}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::put('/admin/services/{serviceId}', [ServiceController::class, 'update'])->name('admin.services.update');
+    Route::delete('/admin/services/{serviceId}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+
     Route::get('/admin/drivers', [DriverController::class, 'adminIndex'])->name('admin.drivers.index');
     Route::get('/admin/cars', [CarController::class, 'adminIndex'])->name('admin.cars.index');
 });
