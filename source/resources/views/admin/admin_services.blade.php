@@ -13,7 +13,15 @@
                         <h2 class="text-2xl font-bold">Service Management</h2>
                         <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleAddForm()">Add Service</button>
                     </div>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <!-- Add Service Form -->
                     <div id="addServiceForm" class="hidden mb-6">
                         <h2 class="text-xl font-bold mb-4">Add Service</h2>
@@ -34,7 +42,7 @@
                                 </div>
                                 <div>
                                     <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
-                                    <input type="file" name="image" id="image" class="w-full px-2 py-1 border border-gray-300 rounded-md" accept="image/*" required>
+                                    <input type="file" name="image" id="image" class="w-full px-2 py-1 border border-gray-300 rounded-md" accept="image/*" nullable>
                                 </div>
                             </div>
                             <div class="mt-4">

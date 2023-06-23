@@ -38,12 +38,12 @@ class UserSeeder extends Seeder
             ],
             // Users
             [
-                'name' => 'jakubw11',
-                'email' => 'jakubw11@gmail.com',
+                'name' => 'user',
+                'email' => 'user@gmail.com',
                 'password' => Hash::make('123456789'),
                 'role' => 'user',
-                'first_name' => 'Jakub',
-                'last_name' => 'Wojtowicz',
+                'first_name' => 'User',
+                'last_name' => 'User',
                 'company_name' => 'Company1',
                 'tax_id' => 1234567890,
                 'created_at' => Carbon::now(),

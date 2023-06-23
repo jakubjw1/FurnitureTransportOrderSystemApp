@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -19,20 +20,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $validated = $request->validated();
-
-        $user = new User;
-
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->password = Hash::make($validated['password']);
-        $user->first_name = $validated['first_name'];
-        $user->last_name = $validated['last_name'];
-        $user->company_name = $validated['company_name'];
-        $user->tax_id = $validated['tax_id'];
-        $user->role = $validated['role'];
-
-        $user->save();
+        User::create($request->all());
 
         return redirect()->route('admin.users.index')->with('success', 'User added successfully');
     }
@@ -43,18 +31,11 @@ class UserController extends Controller
         return view('admin.edit_user', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->company_name = $request->company_name;
-        $user->tax_id = $request->tax_id;
-        $user->role = $request->role;
-        $user->save();
+
+        $user->update($request->all());
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
     }

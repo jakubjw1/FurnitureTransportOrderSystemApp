@@ -16,6 +16,7 @@ class Service extends Model
         'price',
     ];
 
+    //relacja tabeli services z orders
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class, 'service_orders');

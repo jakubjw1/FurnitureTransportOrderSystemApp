@@ -1,1 +1,3 @@
 *.sqlite*
+
+echo "node_modules" >> .gitignore

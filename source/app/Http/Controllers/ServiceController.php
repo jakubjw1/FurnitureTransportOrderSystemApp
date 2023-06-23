@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,7 @@ class ServiceController extends Controller
         return view('admin.admin_services', compact('services'));
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         $service = new Service;
 
@@ -54,7 +55,7 @@ class ServiceController extends Controller
         return view('admin.edit_service', compact('service'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreServiceRequest $request, $id)
     {
         $service = Service::findOrFail($id);
 
@@ -74,8 +75,6 @@ class ServiceController extends Controller
         return redirect()->route('admin.services.index')->with('success', 'Service updated successfully');
     }
 
-
-
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
@@ -83,6 +82,5 @@ class ServiceController extends Controller
 
         return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully');
     }
-
 
 }

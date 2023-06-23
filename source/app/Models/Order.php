@@ -21,11 +21,13 @@ class Order extends Model
         'order_status',
     ];
 
+    // relacja tabeli orders z tabelą users
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    // relacja tabeli orders z tabelą services
     public function services(): BelongsToMany
     {
         return $this->belongsToMany(Service::class, 'service_orders');

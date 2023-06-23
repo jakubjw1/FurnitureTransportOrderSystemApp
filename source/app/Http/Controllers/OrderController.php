@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Service;
@@ -27,11 +29,11 @@ class OrderController extends Controller
         return view('orders/create', compact('selectedService', 'totalAmount', 'disassemblyService', 'disassemblyPrice', 'minServiceDate'));
     }
 
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
         $includeDisassembly = $request->has('include_disassembly');
 
-        $data = $request->all();
+        $data = $request->validated(); // Pobierz tylko zwalidowane dane
 
         // Tworzenie zamówienia
         $order = new Order();
@@ -84,34 +86,34 @@ class OrderController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateOrderRequest $request, $id)
     {
-        $disassemblyService = Service::where('name', 'Disassembly + assembly')->firstOrFail();
+        $includeDisassembly = $request->has('include_disassembly');
+        $selectedServiceId = $request->input('service');
+        $selectedDisassemblyServiceId = $request->input('disassemblyService');
+
+        $data = $request->validated(); // Pobierz tylko zwalidowane dane
 
         $order = Order::findOrFail($id);
 
-        $order->user_id = $request->user_id;
-        $order->car_id = $request->car_id;
-        $order->driver_id = $request->driver_id;
-        $order->order_date = $request->order_date;
-        $order->payment_method = $request->payment_method;
-        $order->service_date = $request->service_date;
-        $order->description = $request->description;
-        $order->from = $request->from;
-        $order->destination = $request->destination;
-        $order->order_status = $request->order_status;
-        $order->total_amount = $request->total_amount;
+        $order->user_id = Auth::id();
+        $order->order_date = now();
+        $order->payment_method = $data['payment_method'];
+        $order->service_date = $data['service_date'];
+        $order->description = $data['description'];
+        $order->total_amount = $data['total_amount'];
+        $order->order_status = 'Pending';
+        $order->from = $data['from'];
+        $order->destination = $data['destination'];
+        $order->save();
 
         $order->services()->detach();
 
-        $selectedServiceId = $request->input('service');
         $order->services()->attach($selectedServiceId);
 
         if ($request->has('disassemblyService')) {
-            $order->services()->attach($disassemblyService->id);
+            $order->services()->attach($selectedDisassemblyServiceId);
         }
-
-        $order->save();
 
         return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully');
     }

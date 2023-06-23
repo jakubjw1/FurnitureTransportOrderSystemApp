@@ -13,7 +13,15 @@
                         <h2 class="text-2xl font-bold">User Management</h2>
                         <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleAddForm()">Add User</button>
                     </div>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <!-- Add User Form -->
                     <div id="addUserForm" class="hidden mb-6">
                         <h2 class="text-xl font-bold mb-4">Add User</h2>

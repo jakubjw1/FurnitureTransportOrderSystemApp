@@ -72,5 +72,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/services/{serviceId}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
     Route::get('/admin/drivers', [DriverController::class, 'adminIndex'])->name('admin.drivers.index');
+    Route::post('/admin/drivers', [DriverController::class, 'store'])->name('admin.drivers.store');
+    Route::get('/admin/drivers/{driverId}/edit', [DriverController::class, 'edit'])->name('admin.drivers.edit');
+    Route::put('/admin/drivers/{driverId}', [DriverController::class, 'update'])->name('admin.drivers.update');
+    Route::delete('/admin/drivers/{driverId}', [DriverController::class, 'destroy'])->name('admin.drivers.destroy');
+
     Route::get('/admin/cars', [CarController::class, 'adminIndex'])->name('admin.cars.index');
+    Route::post('/admin/cars', [CarController::class, 'store'])->name('admin.cars.store');
+    Route::get('/admin/cars/{carId}/edit', [CarController::class, 'edit'])->name('admin.cars.edit');
+    Route::put('/admin/cars/{carId}', [CarController::class, 'update'])->name('admin.cars.update');
+    Route::delete('/admin/cars/{carId}', [CarController::class, 'destroy'])->name('admin.cars.destroy');
 });
